@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110005200) do
+ActiveRecord::Schema.define(version: 20170112025823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accesstokens", force: :cascade do |t|
+    t.integer  "strava_athlete_id"
+    t.string   "athlete_access_token"
+    t.boolean  "access_token_valid"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "strava_athletes", force: :cascade do |t|
+    t.integer  "athlete_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "profile"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "sex"
+    t.datetime "account_created"
+    t.integer  "athlete_type"
+    t.string   "date_preference"
+    t.string   "measurement_preference"
+    t.string   "email"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

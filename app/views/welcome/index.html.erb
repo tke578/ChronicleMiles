@@ -2,4 +2,5 @@
 <p>
   The time is now: <%= Time.now %>
 </p>
-<% raise %>
+
+<%= link_to image_tag('btn_strava_connectwith_orange.png'), strava_auth(@client_id) %>

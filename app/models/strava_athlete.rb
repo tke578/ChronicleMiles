@@ -1,0 +1,2 @@
+class StravaAthlete < ApplicationRecord
+end
