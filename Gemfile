@@ -40,8 +40,10 @@ group :development, :test do
   gem "binding_of_caller"
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'faker'
+  gem 'database_cleaner'
+  gem 'pry', '~> 0.10.4'
 end
 
 group :development do

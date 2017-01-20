@@ -1,4 +1,5 @@
-class WelcomeController < ApplicationController 
+class WelcomeController < ApplicationController
+	before_action	:strava_credentials_request, only: [:access_granted]
 
 	def index
 		@client_id = ENV['STRAVA_API_CLIENT_ID']
@@ -17,20 +18,27 @@ class WelcomeController < ApplicationController
 	end
 
 	def access_granted
-			url = 'https://www.strava.com/oauth/token'
-			client_id = ENV['STRAVA_API_CLIENT_ID']
-			client_secret = ENV['STRAVA_API_CLIENT_SECRET']
-
-			url_params = { 'client_id' => client_id, 'client_secret' => client_secret, 'code' => session[:code] }
-			response = HTTParty.post(url, :query => url_params)
-
-			@response_json = JSON.parse(response.body)
-
+		find_or_create_acess_token
 	end
 
 	def access_denied
 	end
 
-	private 
+	private
+
+	def strava_credentials_request
+		url = 'https://www.strava.com/oauth/token'
+		client_id = ENV['STRAVA_API_CLIENT_ID']
+		client_secret = ENV['STRAVA_API_CLIENT_SECRET']
+		url_params = { 'client_id' => client_id, 'client_secret' => client_secret, 'code' => session[:code] }
+		response = HTTParty.post(url, :query => url_params)
+		@response_json = JSON.parse(response.body)
+	end
+
+	def find_or_create_acess_token
+		athlete_access_token = @response_json["access_token"]
+		athlete_id = @response_json["athlete"]["id"]
+		access_token = Accesstoken.create_with(strava_athlete_id: athlete_id, athlete_access_token: athlete_access_token, access_token_valid: true).find_or_create_by(athlete_access_token: athlete_access_token)
+	end
 
 end
