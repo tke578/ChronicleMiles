@@ -20,8 +20,8 @@
 require 'capybara/rspec'
 #require 'capybara/rails'
 
-# require 'factory_girl_rails'
-require 'factory_girl'
+require 'factory_girl_rails'
+# require 'factory_girl'
 
 require 'database_cleaner'
 
