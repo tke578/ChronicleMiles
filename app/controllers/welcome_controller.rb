@@ -19,6 +19,7 @@ class WelcomeController < ApplicationController
 
 	def access_granted
 		find_or_create_acess_token
+		@access_token = Accesstoken.find_by_athlete_access_token(@response_json["access_token"])
 	end
 
 	def access_denied
@@ -36,9 +37,8 @@ class WelcomeController < ApplicationController
 	end
 
 	def find_or_create_acess_token
-		athlete_access_token = @response_json["access_token"]
-		athlete_id = @response_json["athlete"]["id"]
-		access_token = Accesstoken.create_with(strava_athlete_id: athlete_id, athlete_access_token: athlete_access_token, access_token_valid: true).find_or_create_by(athlete_access_token: athlete_access_token)
+		welcome = Welcome.new(@response_json)
+		welcome.verify_athlete_existence
 	end
 
 end
