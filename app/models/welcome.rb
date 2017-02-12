@@ -9,12 +9,12 @@ class Welcome
 	def verify_athlete_existence
 		@find_athlete_token = Accesstoken.where(athlete_access_token: @access_token, access_token_valid: true).first
 		@find_athlete = StravaAthlete.where(athlete_id: @athlete_id).first
-		
 		if new_athlete?
 			save_access_token_and_athlete
 		elsif old_token_is_invalid?
 			set_previous_token_to_invalid
 			create_token
+			
 		elsif returning_athlete?
 			return
 		end
@@ -35,9 +35,10 @@ class Welcome
 	private
 
 	def set_previous_token_to_invalid
-		@find_athlete_token.update(access_token_valid: false)
+		previous_token = @find_athlete.accesstokens.first
+		previous_token.update(:access_token_valid => false)
 	end
-
+	
 	def create_token
 		Accesstoken.create(athlete_access_token: @access_token, access_token_valid: true)
 	end

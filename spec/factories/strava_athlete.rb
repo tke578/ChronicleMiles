@@ -4,7 +4,7 @@ FactoryGirl.define do
 	factory :strava_athlete do
 		
 		
-			id					{ Faker::Number.number(10) }
+			athlete_id			{ Faker::Number.number(4) }
 			first_name			{ Faker::Name.first_name }
  			last_name			{ Faker::Name.last_name }
  			city				{ Faker::Address.city}

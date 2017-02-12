@@ -25,6 +25,11 @@ class WelcomeController < ApplicationController
 	def access_denied
 	end
 
+	def find_or_create_acess_token
+		welcome = Welcome.new(@response_json)
+		welcome.verify_athlete_existence
+	end
+
 	private
 
 	def strava_credentials_request
@@ -34,11 +39,6 @@ class WelcomeController < ApplicationController
 		url_params = { 'client_id' => client_id, 'client_secret' => client_secret, 'code' => session[:code] }
 		response = HTTParty.post(url, :query => url_params)
 		@response_json = JSON.parse(response.body)
-	end
-
-	def find_or_create_acess_token
-		welcome = Welcome.new(@response_json)
-		welcome.verify_athlete_existence
 	end
 
 end

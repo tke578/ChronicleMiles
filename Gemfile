@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem "omniauth-strava"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,6 +46,7 @@ group :development, :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'pry', '~> 0.10.4'
+  gem 'rails-controller-testing'
 end
 
 group :development do

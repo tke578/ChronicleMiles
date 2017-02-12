@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
     root 'welcome#index'
@@ -7,4 +6,7 @@ Rails.application.routes.draw do
    	match 'token_exchange', to: 'welcome#token_exchange', via: [:get, :post]
    	match 'access_denied',  to: 'welcome#access_denied',  via: [:get]
    	match 'access_granted', to: 'welcome#access_granted', via: [:get]
+
+   	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
 end
