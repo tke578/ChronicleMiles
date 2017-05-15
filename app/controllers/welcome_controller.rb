@@ -1,8 +1,12 @@
 class WelcomeController < ApplicationController
-	before_action	:strava_credentials_request, only: [:access_granted]
+	before_action :authenticate_user!, except: [:index, :home]
+	before_action :strava_credentials_request, only: [:access_granted]
 
 	def index
 		@client_id = ENV['STRAVA_API_CLIENT_ID']
+	end
+
+	def home 
 	end
 
 	def token_exchange

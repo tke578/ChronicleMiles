@@ -8,6 +8,8 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '4c391c04482c30584e5e0078ef30a22a6c54eba490fb26d28605675da2c031c88146ef5ab4c7ea374cf59d1e101779bc1d48604e3a722fc13ccc3096f3f992f8'
   config.omniauth :strava, ENV['STRAVA_API_CLIENT_ID'], ENV['STRAVA_API_CLIENT_SECRET']
+  config.omniauth :facebook, ENV['CHRONICLE_MILES_FACEBOOK_APP_ID'], ENV['CHRONICLE_MILES_FACEBOOK_SECRET']
+  config.omniauth :google_oauth2, ENV['CHRONICLE_MILES_GOOGLE_CLIENT_ID'], ENV['CHRONICLE_MILES_GOOGLE_SECRET']
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class

@@ -2,13 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-html, body{
-	height: 100%;
-  	width: 100%;
-}
-.background-img{
-	height: 100%;
+.cover-shot {
 	background-image: url("npsf.jpg");
-	background-position: center center;
-   background-size: cover; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	min-height:100%;
+	background-repeat:no-repeat;
+}
+.cover-shot {
+	#all_footnotes{
+		display: none;
+	}
+}
+.home-page-splash h1{
+	color:white;
 }
