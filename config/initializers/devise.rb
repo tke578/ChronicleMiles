@@ -7,6 +7,7 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '4c391c04482c30584e5e0078ef30a22a6c54eba490fb26d28605675da2c031c88146ef5ab4c7ea374cf59d1e101779bc1d48604e3a722fc13ccc3096f3f992f8'
+  config.secret_key = ENV['DEVISE_SECRET_KEY']
   config.omniauth :strava, ENV['STRAVA_API_CLIENT_ID'], ENV['STRAVA_API_CLIENT_SECRET']
   config.omniauth :facebook, ENV['CHRONICLE_MILES_FACEBOOK_APP_ID'], ENV['CHRONICLE_MILES_FACEBOOK_SECRET']
   config.omniauth :google_oauth2, ENV['CHRONICLE_MILES_GOOGLE_CLIENT_ID'], ENV['CHRONICLE_MILES_GOOGLE_SECRET']
