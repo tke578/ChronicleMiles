@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+#main-header{
+ font-family: 'Roboto Slab', serif;
+ font-size: 80px;
+}
+
+.home-page-splash a:hover{
+	color: white;
+}
+.sign-in-log-in h2{
+	color: white;
+}
