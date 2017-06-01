@@ -1,9 +1,10 @@
 class Welcome
-	def initialize(request_body)
+	def initialize(request_body, user)
 		@request_body = request_body
 		@access_token = @request_body["access_token"]
 		@athlete = @request_body["athlete"]
 		@athlete_id = @request_body["athlete"]["id"]
+		@user = user
 	end
 
 	def verify_athlete_existence
@@ -40,11 +41,11 @@ class Welcome
 	end
 	
 	def create_token
-		Accesstoken.create(athlete_access_token: @access_token, access_token_valid: true)
+		Accesstoken.create(athlete_access_token: @access_token, access_token_valid: true, user_id: @user.id)
 	end
 
 	def build_access_token
-		Accesstoken.new(athlete_access_token: @access_token, access_token_valid: true)
+		Accesstoken.new(athlete_access_token: @access_token, access_token_valid: true, user_id: @user.id)
 	end
 
 	def save_access_token_and_athlete

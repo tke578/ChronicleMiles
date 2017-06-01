@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :home]
 	before_action :strava_credentials_request, only: [:access_granted]
+	before_action :find_or_create_access_token, only: [:access_granted]
 
 	def index
 		@client_id = ENV['STRAVA_API_CLIENT_ID']
@@ -22,15 +23,17 @@ class WelcomeController < ApplicationController
 	end
 
 	def access_granted
-		find_or_create_acess_token
-		@access_token = Accesstoken.find_by_athlete_access_token(@response_json["access_token"])
+		
+		# find_or_create_access_token
+		
+		# @access_token = Accesstoken.find_by_athlete_access_token(@response_json["access_token"])
 	end
 
 	def access_denied
 	end
 
-	def find_or_create_acess_token
-		welcome = Welcome.new(@response_json)
+	def find_or_create_access_token
+		welcome = Welcome.new(@response_json, current_user)
 		welcome.verify_athlete_existence
 	end
 
