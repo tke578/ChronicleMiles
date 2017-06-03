@@ -1,10 +1,8 @@
 class WelcomeController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :home]
-	before_action :strava_credentials_request, only: [:access_granted]
-	before_action :find_or_create_access_token, only: [:access_granted]
 
 	def index
-		@client_id = ENV['STRAVA_API_CLIENT_ID']
+		@client_id = ENV['STRAVA_API_CLIENT_ID'] unless current_user.valid_access_token
 	end
 
 	def home 
@@ -16,18 +14,13 @@ class WelcomeController < ApplicationController
 			flash[:notice] = "Sorry! Looks like access was not granted!"
 		elsif params[:code]
 			session[:code] = params[:code] || ''
-
-			redirect_to action: "access_granted"
+			strava_credentials_request
+			find_or_create_access_token
+			redirect_to action: "index"
 			flash[:notice] = "Wohoo Access has been granted!"
 		end
 	end
-
-	def access_granted
-		
-		# find_or_create_access_token
-		
-		# @access_token = Accesstoken.find_by_athlete_access_token(@response_json["access_token"])
-	end
+	
 
 	def access_denied
 	end
